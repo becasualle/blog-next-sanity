@@ -1,9 +1,9 @@
-import Avatar from '../components/avatar'
-import Date from '../components/date'
-import CoverImage from '../components/cover-image'
-import PostTitle from '../components/post-title'
+import { Avatar, Date, CoverImage, PostTitle } from "./index";
+import { IndexPost } from "../types";
 
-export default function PostHeader({ title, coverImage, date, author }) {
+type Props = Omit<IndexPost, "_id" | "excerpt" | "name" | "slug">;
+
+export default function PostHeader({ title, coverImage, date, author }: Props) {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -22,5 +22,5 @@ export default function PostHeader({ title, coverImage, date, author }) {
         </div>
       </div>
     </>
-  )
+  );
 }

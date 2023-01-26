@@ -3,8 +3,14 @@ import { Container, MoreStories, HeroPost, Intro, Layout } from "../components";
 import { indexQuery } from "../lib/queries";
 import { usePreviewSubscription } from "../lib/sanity";
 import { getClient, overlayDrafts } from "../lib/sanity.server";
+import { IndexPost } from "../types";
 
-export default function Index({ allPosts: initialAllPosts, preview }) {
+type Props = {
+  allPosts: IndexPost[];
+  preview: boolean;
+};
+
+export default function Index({ allPosts: initialAllPosts, preview }: Props) {
   const { data: allPosts } = usePreviewSubscription(indexQuery, {
     initialData: initialAllPosts,
     enabled: preview,
@@ -36,7 +42,10 @@ export default function Index({ allPosts: initialAllPosts, preview }) {
 }
 
 export async function getStaticProps({ preview = false }) {
-  const allPosts = overlayDrafts(await getClient(preview).fetch(indexQuery));
+  const allPosts: IndexPost[] = overlayDrafts(
+    await getClient(preview).fetch(indexQuery)
+  );
+
   return {
     props: { allPosts, preview },
     // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
