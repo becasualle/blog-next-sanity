@@ -14,7 +14,7 @@ export default function Layout({ preview, children }: Props) {
         <Alert preview={preview} />
         <main>{children}</main>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
