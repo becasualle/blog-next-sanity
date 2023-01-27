@@ -30,6 +30,10 @@
   @apply text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out underline decoration-transparent hover:decoration-inherit;
 }
 
+.markdown time {
+  @apply text-slate-500 text-sm;
+}
+
 .markdown h2 {
   @apply text-3xl mt-12 mb-4 leading-snug;
 }

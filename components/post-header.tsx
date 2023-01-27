@@ -1,5 +1,6 @@
 import { Avatar, Date, CoverImage, PostTitle } from "./index";
 import { IndexPost } from "../types";
+import markdownStyles from "./markdown-styles.module.css";
 
 type Props = Omit<IndexPost, "_id" | "excerpt" | "name" | "slug">;
 
@@ -17,7 +18,7 @@ export default function PostHeader({ title, coverImage, date, author }: Props) {
         <div className="block mb-6 md:hidden">
           {author && <Avatar name={author.name} picture={author.picture} />}
         </div>
-        <div className="mb-6 text-lg">
+        <div className={`mb-2 text-lg" ${markdownStyles.markdown}`}>
           <Date dateString={date} />
         </div>
       </div>
