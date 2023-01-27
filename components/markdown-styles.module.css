@@ -6,7 +6,20 @@
 .markdown ul,
 .markdown ol,
 .markdown blockquote {
-  @apply my-6;
+  @apply my-5;
+}
+
+.markdown ul,
+.markdown li {
+  @apply ml-2 md:ml-3 lg:ml-4;
+}
+
+.markdown ul li {
+  @apply list-disc;
+}
+
+.markdown ol li {
+  @apply list-decimal;
 }
 
 .markdown a {

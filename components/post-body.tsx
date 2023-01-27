@@ -31,7 +31,9 @@ const components = {
 
 export default function PostBody({ content }) {
   return (
-    <div className={`max-w-2xl mx-auto ${markdownStyles.markdown}`}>
+    <div
+      className={`max-w-2xl xl:max-w-3xl mx-auto ${markdownStyles.markdown}`}
+    >
       <PortableText value={content} components={components} />
     </div>
   );
