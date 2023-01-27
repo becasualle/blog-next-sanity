@@ -87,8 +87,6 @@ export async function getStaticProps({ params, preview = false }) {
     slug: params.slug,
   });
 
-  // console.log(post.content.filter((el) => el._type === "image"));
-
   const data = {
     post,
     morePosts: overlayDrafts(morePosts),
