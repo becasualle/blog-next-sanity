@@ -29,6 +29,7 @@ type Props = {
 export default function Post({ data, preview }: Props) {
   const router = useRouter();
   const slug = data?.post?.slug;
+  // TODO: handle error when slug is undefined (when post url is not exist)
   const {
     data: { post, morePosts },
   } = usePreviewSubscription(postQuery, {
@@ -51,9 +52,7 @@ export default function Post({ data, preview }: Props) {
           <>
             <article>
               <Head>
-                <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
-                </title>
+                <title>{post.title} | Без заголовка</title>
                 {post.coverImage?.asset?._ref && (
                   <meta
                     key="ogImage"
@@ -87,6 +86,8 @@ export async function getStaticProps({ params, preview = false }) {
   const { post, morePosts } = await getClient(preview).fetch(postQuery, {
     slug: params.slug,
   });
+
+  // console.log(post.content.filter((el) => el._type === "image"));
 
   const data = {
     post,

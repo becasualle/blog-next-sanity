@@ -28,7 +28,7 @@ export default function CoverImage({
         width={2000}
         height={1000}
         alt={`Cover Image for ${title}`}
-        src={urlForImage(source).height(1000).width(2000).url()}
+        src={urlForImage(source).size(2000, 1000).url()}
         sizes="100vw"
         priority={priority}
       />
