@@ -45,7 +45,6 @@ export async function getStaticProps({ preview = false }) {
   const allPosts: IndexPost[] = overlayDrafts(
     await getClient(preview).fetch(indexQuery)
   );
-  console.log(allPosts);
 
   return {
     props: { allPosts, preview },

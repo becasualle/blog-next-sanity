@@ -1,14 +1,16 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
-import Container from "../../components/container";
-import PostBody from "../../components/post-body";
-import MoreStories from "../../components/more-stories";
-import Header from "../../components/header";
-import PostHeader from "../../components/post-header";
-import SectionSeparator from "../../components/section-separator";
-import Layout from "../../components/layout";
-import PostTitle from "../../components/post-title";
+import {
+  Container,
+  PostBody,
+  MoreStories,
+  Header,
+  PostHeader,
+  SectionSeparator,
+  Layout,
+  PostTitle,
+} from "../../components";
 import { CMS_NAME } from "../../lib/constants";
 import { postQuery, postSlugsQuery } from "../../lib/queries";
 import { urlForImage, usePreviewSubscription } from "../../lib/sanity";
@@ -17,17 +19,22 @@ import {
   getClient,
   overlayDrafts,
 } from "../../lib/sanity.server";
+import { SanityData } from "../../types";
 
-export default function Post({ data = {}, preview }) {
+type Props = {
+  data: SanityData;
+  preview: boolean;
+};
+
+export default function Post({ data, preview }: Props) {
   const router = useRouter();
-
   const slug = data?.post?.slug;
   const {
     data: { post, morePosts },
   } = usePreviewSubscription(postQuery, {
     params: { slug },
     initialData: data,
-    enabled: preview && slug,
+    enabled: preview,
   });
 
   if (!router.isFallback && !slug) {
@@ -81,13 +88,15 @@ export async function getStaticProps({ params, preview = false }) {
     slug: params.slug,
   });
 
+  const data = {
+    post,
+    morePosts: overlayDrafts(morePosts),
+  } as SanityData;
+
   return {
     props: {
       preview,
-      data: {
-        post,
-        morePosts: overlayDrafts(morePosts),
-      },
+      data,
     },
     // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
     revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
