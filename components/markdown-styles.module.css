@@ -9,13 +9,17 @@
   @apply my-5;
 }
 
-.markdown ul,
-.markdown li {
-  @apply ml-2 md:ml-3 lg:ml-4;
+.markdown ul {
+  @apply ml-1 lg:ml-3 list-none;
 }
 
-.markdown ul li {
-  @apply list-disc;
+.markdown ol {
+  @apply ml-6 lg:ml-8 list-none;
+}
+
+.markdown ul > li:before {
+  content: "—";
+  @apply mr-2;
 }
 
 .markdown ol li {
