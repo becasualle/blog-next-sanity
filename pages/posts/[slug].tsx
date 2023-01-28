@@ -53,7 +53,7 @@ export default function Post({ data = {}, preview, slug }: Props) {
           <>
             <article>
               <Head>
-                <title>{post.title} | Без заголовка</title>
+                <title>{post.title}</title>
                 {post.coverImage?.asset?._ref && (
                   <meta
                     key="ogImage"
