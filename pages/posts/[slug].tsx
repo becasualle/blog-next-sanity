@@ -11,7 +11,6 @@ import {
   Layout,
   PostTitle,
 } from "../../components";
-import { CMS_NAME } from "../../lib/constants";
 import { postQuery, postSlugsQuery } from "../../lib/queries";
 import { urlForImage, usePreviewSubscription } from "../../lib/sanity";
 import {
@@ -22,15 +21,17 @@ import {
 import { SanityData } from "../../types";
 
 type Props = {
-  data: SanityData;
+  data: SanityData | {};
   preview: boolean;
+  slug: string;
 };
 
-export default function Post({ data, preview }: Props) {
+export default function Post({ data = {}, preview, slug }: Props) {
   const router = useRouter();
-  const slug = data?.post?.slug;
+
   // TODO: handle error when slug is undefined (when post url is not exist)
   const {
+    // @ts-ignore
     data: { post, morePosts },
   } = usePreviewSubscription(postQuery, {
     params: { slug },
@@ -83,8 +84,9 @@ export default function Post({ data, preview }: Props) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
+  const slug = params.slug;
   const { post, morePosts } = await getClient(preview).fetch(postQuery, {
-    slug: params.slug,
+    slug,
   });
 
   const data = {
@@ -96,6 +98,7 @@ export async function getStaticProps({ params, preview = false }) {
     props: {
       preview,
       data,
+      slug,
     },
     // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
     revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
@@ -104,8 +107,9 @@ export async function getStaticProps({ params, preview = false }) {
 
 export async function getStaticPaths() {
   const paths = await sanityClient.fetch(postSlugsQuery);
+
   return {
-    paths: paths.map((slug) => ({ params: { slug } })),
+    paths: paths.map((slug: string) => ({ params: { slug } })),
     fallback: true,
   };
 }
