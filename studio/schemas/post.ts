@@ -28,6 +28,12 @@ export default {
         {
           type: "image",
         },
+        {
+          type: "code",
+          options: {
+            theme: "monokai",
+          },
+        },
       ],
     },
     {

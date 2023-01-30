@@ -12,6 +12,7 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
+    "@sanity/code-input",
     "asset-source-unsplash",
     "@sanity/production-preview"
   ],

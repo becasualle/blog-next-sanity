@@ -85,9 +85,9 @@ export default function Post({ data = {}, preview, slug }: Props) {
 
 export async function getStaticProps({ params, preview = false }) {
   const slug = params.slug;
-  const { post, morePosts } = await getClient(preview).fetch(postQuery, {
+  const { post, morePosts } = (await getClient(preview).fetch(postQuery, {
     slug,
-  });
+  })) as SanityData;
 
   const data = {
     post,

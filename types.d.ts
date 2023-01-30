@@ -1,12 +1,12 @@
 export interface SanityData {
-  post: Post;
-  morePosts: any[];
+  post: PostDocument;
+  morePosts: PostDocument[];
 }
 
-export interface Post {
+export interface PostDocument {
   _id: string;
   author: Author | null;
-  content: Content[] | null;
+  content: Content | null;
   coverImage: CoverImage | null;
   date: string | null;
   excerpt: string | null;
@@ -15,7 +15,7 @@ export interface Post {
   title: string | null;
 }
 
-export type IndexPost = Omit<Post, "content">;
+export type IndexPostDocument = Omit<PostDocument, "content">;
 
 export interface Author {
   name: string;
@@ -23,7 +23,7 @@ export interface Author {
 }
 
 export interface CoverImage {
-  _type: string;
+  _type: "image";
   asset: Asset;
 }
 
@@ -32,18 +32,39 @@ export interface Asset {
   _type: string;
 }
 
-export interface Content {
+export type ContentBlock = MainBlock | ImageBlock | CodeBlock;
+export type Content = ContentBlock[];
+
+export interface BlockBase {
   _key: string;
   _type: string;
-  children?: Child[];
-  markDefs?: any[];
-  style?: string;
-  asset?: Asset;
 }
 
-export interface Child {
+export interface MainBlock extends BlockBase {
+  children: ChildSpan[];
+  level?: number;
+  listItem?: "bullet" | "number";
+  markDefs: MarkDef[];
+  style: string;
+}
+
+export interface ImageBlock extends BlockBase {
+  asset: Asset;
+}
+
+export interface CodeBlock extends BlockBase {
+  code: string;
+  highlightedLines?: numbers[];
+  language: string;
+}
+
+export interface ChildSpan extends BlockBase {
   _key: string;
   _type: string;
   marks: string[];
   text: string;
+}
+
+export interface MarkDef extends BlockBase {
+  href: string;
 }

@@ -1,10 +1,13 @@
 import markdownStyles from "./markdown-styles.module.css";
 import { PortableText, PortableTextComponentProps } from "@portabletext/react";
 import { urlForImage } from "../lib/sanity";
-import { Content } from "../types";
-
+import { ImageBlock, CodeBlock } from "../types";
 import Image from "next/image";
-const ArticleImage = ({ value }: PortableTextComponentProps<Content>) => {
+import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
+const ArticleImage = ({ value }: PortableTextComponentProps<ImageBlock>) => {
+  // @ts-ignore
   const [width, height] = value.asset._ref
     .split("-")
     .find((el) => el.includes("x"))
@@ -23,9 +26,18 @@ const ArticleImage = ({ value }: PortableTextComponentProps<Content>) => {
   );
 };
 
+const CodeHighlight = ({ value }: PortableTextComponentProps<CodeBlock>) => {
+  return (
+    <SyntaxHighlighter language={value.language} style={oneDark}>
+      {value.code}
+    </SyntaxHighlighter>
+  );
+};
+
 const components = {
   types: {
     image: ArticleImage,
+    code: CodeHighlight,
   },
 };
 
