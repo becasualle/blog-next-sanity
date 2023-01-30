@@ -3,10 +3,10 @@ import { Container, MoreStories, HeroPost, Intro, Layout } from "../components";
 import { indexQuery } from "../lib/queries";
 import { usePreviewSubscription } from "../lib/sanity";
 import { getClient, overlayDrafts } from "../lib/sanity.server";
-import { IndexPost } from "../types";
+import { IndexPostDocument } from "../types";
 
 type Props = {
-  allPosts: IndexPost[];
+  allPosts: IndexPostDocument[];
   preview: boolean;
 };
 
@@ -42,7 +42,7 @@ export default function Index({ allPosts: initialAllPosts, preview }: Props) {
 }
 
 export async function getStaticProps({ preview = false }) {
-  const allPosts: IndexPost[] = overlayDrafts(
+  const allPosts: IndexPostDocument[] = overlayDrafts(
     await getClient(preview).fetch(indexQuery)
   );
 

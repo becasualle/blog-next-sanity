@@ -1,8 +1,8 @@
 import { Avatar, Date, CoverImage, PostTitle } from "./index";
-import { IndexPost } from "../types";
+import { IndexPostDocument } from "../types";
 import markdownStyles from "./markdown-styles.module.css";
 
-type Props = Omit<IndexPost, "_id" | "excerpt" | "name" | "slug">;
+type Props = Omit<IndexPostDocument, "_id" | "excerpt" | "name" | "slug">;
 
 export default function PostHeader({ title, coverImage, date, author }: Props) {
   return (
