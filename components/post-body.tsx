@@ -30,7 +30,6 @@ const Pre = () => {
   return <span>asodasm</span>;
 };
 const CodeHighlight = ({ value }: PortableTextComponentProps<CodeBlock>) => {
-  console.log(value);
   return (
     <SyntaxHighlighter language={value.language} style={oneDark}>
       {value.code}
