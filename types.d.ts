@@ -56,6 +56,7 @@ export interface CodeBlock extends BlockBase {
   code: string;
   highlightedLines?: numbers[];
   language: string;
+  filename?: string;
 }
 
 export interface ChildSpan extends BlockBase {
