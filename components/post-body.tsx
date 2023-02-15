@@ -3,7 +3,7 @@ import { PortableText, PortableTextComponentProps } from "@portabletext/react";
 import { urlForImage } from "../lib/sanity";
 import { ImageBlock, CodeBlock } from "../types";
 import Image from "next/image";
-import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 const ArticleImage = ({ value }: PortableTextComponentProps<ImageBlock>) => {
