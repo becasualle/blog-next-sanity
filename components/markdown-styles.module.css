@@ -31,11 +31,11 @@
 }
 
 .markdown time {
-  @apply text-slate-500 text-sm;
+  @apply text-slate-500 dark:text-slate-300 text-sm;
 }
 
 .markdown blockquote {
-  @apply italic border-l-4 p-4 bg-neutral-100 text-neutral-600 border-neutral-500;
+  @apply italic border-l-4 p-4 bg-neutral-100 text-neutral-600 border-neutral-500 dark:bg-zinc-800 dark:text-slate-300;
 }
 
 .markdown h2 {
